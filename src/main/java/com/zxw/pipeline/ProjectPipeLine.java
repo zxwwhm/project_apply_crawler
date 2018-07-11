@@ -2,7 +2,6 @@ package com.zxw.pipeline;
 
 import com.zxw.repository.ProjectRepo;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
