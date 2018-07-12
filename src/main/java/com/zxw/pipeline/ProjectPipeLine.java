@@ -1,5 +1,6 @@
 package com.zxw.pipeline;
 
+import com.zxw.entity.Project;
 import com.zxw.repository.ProjectRepo;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.ResultItems;
@@ -7,6 +8,7 @@ import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author duchenguang
@@ -21,6 +23,9 @@ public class ProjectPipeLine implements Pipeline {
 
   @Override
   public void process(ResultItems resultItems, Task task) {
-
+    List<Project> projectList=resultItems.get("projectLists");
+    if(projectList!=null){
+      projectRepo.save(projectList);
+    }
   }
 }

@@ -8,9 +8,9 @@
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://127.0.0.1:3306/std_in_news_baidu?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/projectcrawler?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"/>
         <property name="username" value="root"/>
-        <property name="password" value="dcg3075477"/>
+        <property name="password" value="123456"/>
     </bean>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
