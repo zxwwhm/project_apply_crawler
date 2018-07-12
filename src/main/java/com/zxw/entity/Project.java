@@ -8,7 +8,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "")//填表名
+@Table(name = "project")//填表名
 public class Project {
 
   @Id
