@@ -33,28 +33,16 @@ public class NsfcDetailCrawler {
 
 
     public void runCrawler(){
-
-        while(true){
-
-            List<String> urlList=projectRepo.findDistinctUrl();
-
-            Site site = Site.me().setCycleRetryTimes(20).setSleepTime(500).setTimeOut(5000)
-
-                    .setUserAgent("User-Agent:Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36");
+            List<Project> urlList=projectRepo.findAll();
             Spider spider = Spider.create(detailPageProcessor)
-                  .addRequest(getRequestsByUrls(urlList))
-                    .addUrl("http://www.nsfc.gov.cn/publish/portal0/tab568");
+                  .addRequest(getRequestsByUrls(urlList));
                    // .addPipeline(projectPipeLine);
              spider.run();
-        }
-
-
-
     }
 
-    private static Request[] getRequestsByUrls(List<String> urlList) {
+    private static Request[] getRequestsByUrls(List<Project> urlList) {
         List<Request> requestList = urlList.stream()
-                .map(Request::new)
+                .map(project -> new Request(project.getUrl()+"?id="+project.getId()))
                 .collect(Collectors.toList());
         Request[] requests = new Request[requestList.size()];
         return requestList.toArray(requests);

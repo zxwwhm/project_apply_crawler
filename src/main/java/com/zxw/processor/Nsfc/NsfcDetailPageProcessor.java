@@ -24,26 +24,27 @@ public class NsfcDetailPageProcessor implements PageProcessor {
     @Override
     public void process(Page page) {
         page.setCharset("utf-8");
-        String html = page.getHtml().toString();
-        Document document = Jsoup.parse(html);
+        // 从URL中得到id
+        String idStr = page.getUrl().regex("\\?id=(\\d+)$").get();
+        Long projectId = Long.parseLong(idStr);
+        Document document = page.getHtml().getDocument();
 
         Elements content=document.select("#ess_ctr1181_ModuleContent > tbody > tr > td > ul");
-        String title =content.select("div.title_xilan > h1").text();
-        //String date = document.select("#ess_ctr1181_ModuleContent > tbody > tr > td > ul > div:nth-child(3) > div.line_xilan").text();
         String detail = content.select("div.content_xilan").text();
-        Elements appendix = content.select("#zoom > p:nth-child(3) > a");
-        String appendixUrl = "http://www.nsfc.gov.cn/" + appendix.attr("href");
-        String appendixName=content.select("#zoom > p:nth-child(3) > a > span").text();
+//        Elements appendix = content.select("#zoom > p:nth-child(3) > a");
+//        String appendixUrl = "http://www.nsfc.gov.cn/" + appendix.attr("href");
+//        String appendixName=content.select("#zoom > p:nth-child(3) > a > span").text();
 
-        Project project = new Project(title, detail,appendixUrl,appendixName);
-        List<Project> projectList = new ArrayList<>();
-        projectList.add(project);
-        page.putField("projectLists", projectList);
+
+        page.putField("projectId", projectId);
+        page.putField("detail", detail);
     }
 
     @Override
     public Site getSite() {
-        return Site.me().setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/604.3.5 (KHTML, like Gecko) Version/11.0.1 Safari/604.3.5");
+        return Site.me().setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/604.3.5 (KHTML, like Gecko) Version/11.0.1 Safari/604.3.5")
+            .setSleepTime(1000)
+            .setRetryTimes(3);
     }
 
     public static void main(String[] args) {

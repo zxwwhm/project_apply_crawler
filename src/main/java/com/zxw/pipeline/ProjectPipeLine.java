@@ -27,5 +27,11 @@ public class ProjectPipeLine implements Pipeline {
     if(projectList!=null){
       projectRepo.save(projectList);
     }
+
+    Long projectId = resultItems.get("projectId");
+    if (projectId != null){
+      String detail = resultItems.get("detail");
+      projectRepo.updateProjectById(projectId, detail);
+    }
   }
 }
