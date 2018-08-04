@@ -67,10 +67,10 @@ public class NsfcBriefPageProcessor implements PageProcessor {
             .setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/604.3.5 (KHTML, like Gecko) Version/11.0.1 Safari/604.3.5");
   }
 
-  /*public static void main(String[] args) {
+  public static void main(String[] args) {
     Spider spider = Spider.create(new NsfcBriefPageProcessor());
-    spider.addUrl("http://www.nsfc.gov.cn/publish/portal0/tab568/module1413/page1.htm");
+    spider.addUrl("http://www.nsfc.gov.cn/publish/portal0/tab568");
     spider.run();
-  }*/
+  }
 }
 //http://www.nsfc.gov.cn/publish/portal0/tab568/

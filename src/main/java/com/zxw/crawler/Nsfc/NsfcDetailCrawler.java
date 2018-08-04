@@ -1,11 +1,13 @@
 package com.zxw.crawler.Nsfc;
 
 import com.zxw.entity.Project;
+import com.zxw.pipeline.AppendixPipeline;
 import com.zxw.pipeline.ProjectPipeLine;
 import com.zxw.processor.Nsfc.NsfcBriefPageProcessor;
 import com.zxw.processor.Nsfc.NsfcDetailPageProcessor;
 import com.zxw.repository.ProjectRepo;
 
+import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
  * @date 2018/7/11.
  */
 
+@Component("NsfcDetailCrawler")
 public class NsfcDetailCrawler {
     @Resource
     private NsfcBriefPageProcessor briefPageProcessor;
@@ -29,14 +32,19 @@ public class NsfcDetailCrawler {
     ProjectPipeLine projectPipeLine;
     @Resource
     private ProjectRepo projectRepo;
+    @Resource
+    AppendixPipeline appendixPipeline;
 
 
 
     public void runCrawler(){
             List<Project> urlList=projectRepo.findAll();
             Spider spider = Spider.create(detailPageProcessor)
-                  .addRequest(getRequestsByUrls(urlList));
-                   // .addPipeline(projectPipeLine);
+                         .addRequest(getRequestsByUrls(urlList))
+                        .addPipeline(projectPipeLine);
+                     //   .addPipeline(appendixPipeline);
+
+
              spider.run();
     }
 

@@ -23,7 +23,7 @@ public class ProjectPipeLine implements Pipeline {
 
   @Override
   public void process(ResultItems resultItems, Task task) {
-    List<Project> projectList=resultItems.get("projectLists");
+   List<Project> projectList=resultItems.get("projectLists");
     if(projectList!=null){
       projectRepo.save(projectList);
     }

@@ -1,5 +1,6 @@
 package com.zxw;
 
+import com.zxw.crawler.Nsfc.NsfcAppendixCrawler;
 import com.zxw.crawler.Nsfc.NsfcDetailCrawler;
 import com.zxw.crawler.Nsfc.NsfcListCrawler;
 import org.springframework.context.ApplicationContext;
@@ -15,9 +16,11 @@ public class Client {
     ApplicationContext ac = new ClassPathXmlApplicationContext("spring-config.xml");
 //    YourCrawler crawler = (YourChatCrawler) ac.getBean("YourChatCrawler");
 //    crawler.run();
-   /* NsfcListCrawler nsfcListCrawler=(NsfcListCrawler) ac.getBean("NsfcListCrawler");
+   /*NsfcListCrawler nsfcListCrawler=(NsfcListCrawler) ac.getBean("NsfcListCrawler");
     nsfcListCrawler.run();*/
-    NsfcDetailCrawler nsfcDetailCrawler=(NsfcDetailCrawler) ac.getBean("NsfcDetailCrawler");
-    nsfcDetailCrawler.runCrawler();
+    /*NsfcDetailCrawler nsfcDetailCrawler=(NsfcDetailCrawler) ac.getBean("NsfcDetailCrawler");
+    nsfcDetailCrawler.runCrawler();*/
+    NsfcAppendixCrawler nsfcAppendixCrawler=(NsfcAppendixCrawler)ac.getBean("NsfcAppendixCrawler");
+    nsfcAppendixCrawler.run();
   }
 }
